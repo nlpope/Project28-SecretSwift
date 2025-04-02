@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		40B771CF2D9D8E7500F64D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B771C42D9D8E7500F64D3D /* Assets.xcassets */; };
+		40B771D12D9D8E7500F64D3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B771C72D9D8E7500F64D3D /* LaunchScreen.storyboard */; };
+		40B771D22D9D8E7500F64D3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B771C92D9D8E7500F64D3D /* Main.storyboard */; };
+		40B771D32D9D8E7500F64D3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B771C32D9D8E7500F64D3D /* AppDelegate.swift */; };
+		40B771D42D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40B771CA2D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodeld */; };
+		40B771D52D9D8E7500F64D3D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B771CB2D9D8E7500F64D3D /* SceneDelegate.swift */; };
+		40B771D62D9D8E7500F64D3D /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B771CC2D9D8E7500F64D3D /* HomeVC.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		40B771A62D9D8E5B00F64D3D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,27 +37,17 @@
 		40B7718C2D9D8E5100F64D3D /* Project28-SecretSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project28-SecretSwift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B771A52D9D8E5B00F64D3D /* Project28-SecretSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project28-SecretSwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B771AF2D9D8E5B00F64D3D /* Project28-SecretSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project28-SecretSwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40B771C32D9D8E7500F64D3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		40B771C42D9D8E7500F64D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		40B771C52D9D8E7500F64D3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40B771C62D9D8E7500F64D3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		40B771C82D9D8E7500F64D3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		40B771CB2D9D8E7500F64D3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		40B771CC2D9D8E7500F64D3D /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		40B771CE2D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project28_SecretSwift.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		40B771B72D9D8E5B00F64D3D /* Exceptions for "Project28-SecretSwift" folder in "Project28-SecretSwift" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 40B7718B2D9D8E5100F64D3D /* Project28-SecretSwift */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		40B7718E2D9D8E5100F64D3D /* Project28-SecretSwift */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				40B771B72D9D8E5B00F64D3D /* Exceptions for "Project28-SecretSwift" folder in "Project28-SecretSwift" target */,
-			);
-			path = "Project28-SecretSwift";
-			sourceTree = "<group>";
-		};
 		40B771A82D9D8E5B00F64D3D /* Project28-SecretSwiftTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Project28-SecretSwiftTests";
@@ -88,7 +88,7 @@
 		40B771832D9D8E5100F64D3D = {
 			isa = PBXGroup;
 			children = (
-				40B7718E2D9D8E5100F64D3D /* Project28-SecretSwift */,
+				40B771CD2D9D8E7500F64D3D /* Project28-SecretSwift */,
 				40B771A82D9D8E5B00F64D3D /* Project28-SecretSwiftTests */,
 				40B771B22D9D8E5B00F64D3D /* Project28-SecretSwiftUITests */,
 				40B7718D2D9D8E5100F64D3D /* Products */,
@@ -105,6 +105,37 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		40B771CD2D9D8E7500F64D3D /* Project28-SecretSwift */ = {
+			isa = PBXGroup;
+			children = (
+				40B771D82D9D8EC000F64D3D /* Screens */,
+				40B771D72D9D8E8900F64D3D /* Support */,
+				40B771C52D9D8E7500F64D3D /* Info.plist */,
+			);
+			path = "Project28-SecretSwift";
+			sourceTree = "<group>";
+		};
+		40B771D72D9D8E8900F64D3D /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				40B771C32D9D8E7500F64D3D /* AppDelegate.swift */,
+				40B771CB2D9D8E7500F64D3D /* SceneDelegate.swift */,
+				40B771C92D9D8E7500F64D3D /* Main.storyboard */,
+				40B771C72D9D8E7500F64D3D /* LaunchScreen.storyboard */,
+				40B771C42D9D8E7500F64D3D /* Assets.xcassets */,
+				40B771CA2D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodeld */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		40B771D82D9D8EC000F64D3D /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				40B771CC2D9D8E7500F64D3D /* HomeVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +150,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				40B7718E2D9D8E5100F64D3D /* Project28-SecretSwift */,
 			);
 			name = "Project28-SecretSwift";
 			packageProductDependencies = (
@@ -225,6 +253,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B771CF2D9D8E7500F64D3D /* Assets.xcassets in Resources */,
+				40B771D12D9D8E7500F64D3D /* LaunchScreen.storyboard in Resources */,
+				40B771D22D9D8E7500F64D3D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +280,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B771D32D9D8E7500F64D3D /* AppDelegate.swift in Sources */,
+				40B771D42D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodeld in Sources */,
+				40B771D52D9D8E7500F64D3D /* SceneDelegate.swift in Sources */,
+				40B771D62D9D8E7500F64D3D /* HomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +315,25 @@
 			targetProxy = 40B771B02D9D8E5B00F64D3D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		40B771C72D9D8E7500F64D3D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40B771C62D9D8E7500F64D3D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		40B771C92D9D8E7500F64D3D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40B771C82D9D8E7500F64D3D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		40B771B92D9D8E5B00F64D3D /* Debug */ = {
@@ -569,6 +623,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40B771CA2D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40B771CE2D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodel */,
+			);
+			currentVersion = 40B771CE2D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodel */;
+			path = Project28_SecretSwift.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 40B771842D9D8E5100F64D3D /* Project object */;
 }
