@@ -34,8 +34,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sUD-BK-fDB">
-                                <rect key="frame" x="0.0" y="73" width="393" height="731"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUI-8W-pNS">
+                                <rect key="frame" x="136.33333333333334" y="438.66666666666669" width="120.66666666666666" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="RFC-kL-obZ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Authenticate"/>
+                                <connections>
+                                    <action selector="authenticateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nqM-J9-gNK"/>
+                                </connections>
+                            </button>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sUD-BK-fDB">
+                                <rect key="frame" x="1" y="128" width="393" height="676"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -45,10 +56,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sUD-BK-fDB" secondAttribute="bottom" constant="14" id="0OL-wM-7gt"/>
-                            <constraint firstItem="sUD-BK-fDB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-30" id="COk-Ex-G5W"/>
-                            <constraint firstItem="sUD-BK-fDB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XYI-J8-pn8"/>
-                            <constraint firstItem="sUD-BK-fDB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iur-nM-cJY"/>
+                            <constraint firstItem="sUD-BK-fDB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="25" id="Gj8-f2-edc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sUD-BK-fDB" secondAttribute="trailing" constant="-17" id="J6p-Su-Dmd"/>
+                            <constraint firstItem="EUI-8W-pNS" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="XAu-i8-MOI"/>
+                            <constraint firstItem="EUI-8W-pNS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lUn-O7-Iaf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sUD-BK-fDB" secondAttribute="bottom" constant="14" id="lWZ-Zv-xUs"/>
+                            <constraint firstItem="sUD-BK-fDB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="1" id="rSZ-Zu-cjS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LZB-Wx-KwR"/>
