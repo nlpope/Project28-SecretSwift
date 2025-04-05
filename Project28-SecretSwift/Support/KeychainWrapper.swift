@@ -199,6 +199,9 @@ open class KeychainWrapper {
             return nil
         }
         
+        /** to ignore soft yellow warnings in certain swift files visit:
+         https://stackoverflow.com/questions/6921884/in-xcode-how-to-suppress-all-warnings-in-specific-source-files
+         */
         return try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(keychainData) as? NSCoding
     }
 

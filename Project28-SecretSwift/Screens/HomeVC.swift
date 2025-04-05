@@ -8,17 +8,15 @@ import LocalAuthentication
 class HomeVC: UIViewController
 {
     @IBOutlet var secret: UITextView!
+    var isFirstLoad = true
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setUpNavigation()
+        applyNavigationMask()
         setUpApplicationNotifications()
         setUpKeyboardNotifications()
     }
-    
-    
-    func setUpNavigation() { title = SecretKeys.secretTitle }
     
     
     @IBAction func authenticateTapped(_ sender: Any)
@@ -46,14 +44,39 @@ class HomeVC: UIViewController
             }
         }
     }
-    
+
     
     func unlockSecretMessage()
     {
         secret.isHidden = false
-        title           = "Secret stuff!"
-        
+        removeNavigationMask()
         secret.text     = KeychainWrapper.standard.string(forKey: SecretKeys.secretMessage) ?? ""
+    }
+    
+    
+    @objc func doneTapped()
+    {
+        saveSecretMessage()
+        applyNavigationMask()
+    }
+    
+    //-------------------------------------//
+    // MARK: NAVIGATION MASKING & UNMASKING
+    
+    func applyNavigationMask()
+    {
+        title = SecretKeys.maskedTitle
+        self.navigationItem.rightBarButtonItem = nil
+    }
+    
+    
+    func removeNavigationMask()
+    {
+        title = SecretKeys.unmaskedTitle
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done",
+                                                                 style: .done,
+                                                                 target: self,
+                                                                 action: #selector(doneTapped))
     }
     
     //-------------------------------------//
@@ -90,7 +113,7 @@ class HomeVC: UIViewController
         KeychainWrapper.standard.set(secret.text, forKey: SecretKeys.secretMessage)
         secret.resignFirstResponder()
         secret.isHidden = true
-        title           = SecretKeys.secretTitle
+        title           = SecretKeys.maskedTitle
     }
     
     //-------------------------------------//
@@ -137,7 +160,9 @@ class HomeVC: UIViewController
                                                right: 0)
         }
         
-        secret.scrollIndicatorInsets    = secret.contentInset
+        /** secret.scrollIndicatorInsets    = secret.contentInset  (deprecated) */
+        secret.horizontalScrollIndicatorInsets  = secret.contentInset
+        secret.verticalScrollIndicatorInsets    = secret.contentInset
         
         let selectedRange               = secret.selectedRange
         secret.scrollRangeToVisible(selectedRange)
