@@ -30,22 +30,19 @@ class HomeVC: UIViewController
          then evalueate the policy with the OG NSError you set up who's value should now be filled via mem address
          after '.canEvalPolicy' returned its Bool*/
         
-        if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            evaluatePolicy(inContext: ctx)
-        } else {
-            /** no biometry */
-        }
+        if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) { evaluatePolicy(ctx: ctx) }
+        else { handleNoBiometryError() }
     }
     
     
-    func evaluatePolicy(inContext ctx: LAContext)
+    func evaluatePolicy(ctx: LAContext)
     {
         let reason = SecretKeys.touchIDReason
         
         ctx.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, authenticationError in
             DispatchQueue.main.async {
                 if success { self?.unlockSecretMessage() }
-                else { /** handle error */ }
+                else { self?.handleAuthenticationError() }
             }
         }
     }
@@ -59,6 +56,32 @@ class HomeVC: UIViewController
         secret.text     = KeychainWrapper.standard.string(forKey: SecretKeys.secretMessage) ?? ""
     }
     
+    //-------------------------------------//
+    // MARK: ERROR HANDLING
+    
+    func handleNoBiometryError()
+    {
+        let msg     = "Your device is not configured for biometric authentication"
+        let action1 = UIAlertAction(title: "OK", style: .default)
+        
+        let ac      = UIAlertController(title: "Biometry unavailable", message: msg, preferredStyle: .alert)
+        ac.addAction(action1)
+        self.present(ac, animated: true)
+    }
+    
+    
+    func handleAuthenticationError()
+    {
+        let msg     = "You could not be verified; please try again."
+        let action1 = UIAlertAction(title: "OK", style: .default)
+        
+        let ac      = UIAlertController(title: "Authentication failed", message: msg, preferredStyle: .alert)
+        ac.addAction(action1)
+        self.present(ac, animated: true)
+    }
+    
+    //-------------------------------------//
+    // MARK: SAVE & LOAD
     
     @objc func saveSecretMessage()
     {
