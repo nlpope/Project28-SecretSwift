@@ -18,10 +18,7 @@ class HomeVC: UIViewController
     }
     
     
-    func setUpNavigation()
-    {
-        title = SecretKeys.secretTitle
-    }
+    func setUpNavigation() { title = SecretKeys.secretTitle }
     
     
     @IBAction func authenticateTapped(_ sender: Any)
@@ -34,16 +31,16 @@ class HomeVC: UIViewController
          after '.canEvalPolicy' returned its Bool*/
         
         if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            evaluatePolicy(inContext: ctx, error: error)
+            evaluatePolicy(inContext: ctx)
         } else {
-            /** handle error */
+            /** no biometry */
         }
     }
     
     
-    func evaluatePolicy(inContext ctx: LAContext, error: NSError?)
+    func evaluatePolicy(inContext ctx: LAContext)
     {
-        let reason = "Identify yourself!"
+        let reason = SecretKeys.touchIDReason
         
         ctx.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, authenticationError in
             DispatchQueue.main.async {

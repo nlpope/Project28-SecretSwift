@@ -8,4 +8,5 @@ enum SecretKeys
 {
     static let secretTitle      = "Nothing to see here"
     static let secretMessage    = "SecretMessage"
+    static let touchIDReason    = "Your identity must first be confirmed via Touch ID. May we make this attempt now?"
 }
