@@ -10,4 +10,5 @@ enum SecretKeys
     static let unmaskedTitle    = "I am Spider - Man"
     static let secretMessage    = "SecretMessage"
     static let touchIDReason    = "Your identity must first be confirmed via Touch ID. May we make this attempt now?"
+    static var password         = "passwordKey"
 }

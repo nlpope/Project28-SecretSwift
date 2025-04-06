@@ -101,6 +101,7 @@ public enum KeychainItemAccessibility {
         return nil
     }
 }
+
 /** NP FIX - replaced kSecAttrAccessibleAlways w kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly */
 /** NP FIX - replaced kSecAttrAccessibleAlwaysThisDeviceOnly w kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly */
 private let keychainItemAccessibilityLookup: [KeychainItemAccessibility:CFString] = {

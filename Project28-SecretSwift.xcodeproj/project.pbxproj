@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40AA49752DA20ECC00A56C9F /* SSError+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA49742DA20ECB00A56C9F /* SSError+Utils.swift */; };
+		40AA49782DA20FBE00A56C9F /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA49772DA20FBE00A56C9F /* UIViewController+Ext.swift */; };
 		40B771CF2D9D8E7500F64D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B771C42D9D8E7500F64D3D /* Assets.xcassets */; };
 		40B771D12D9D8E7500F64D3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B771C72D9D8E7500F64D3D /* LaunchScreen.storyboard */; };
 		40B771D22D9D8E7500F64D3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B771C92D9D8E7500F64D3D /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40AA49742DA20ECB00A56C9F /* SSError+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSError+Utils.swift"; sourceTree = "<group>"; };
+		40AA49772DA20FBE00A56C9F /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		40B7718C2D9D8E5100F64D3D /* Project28-SecretSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project28-SecretSwift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B771A52D9D8E5B00F64D3D /* Project28-SecretSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project28-SecretSwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B771AF2D9D8E5B00F64D3D /* Project28-SecretSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project28-SecretSwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40AA49762DA20FA700A56C9F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				40AA49772DA20FBE00A56C9F /* UIViewController+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		40B771832D9D8E5100F64D3D = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +126,7 @@
 		40B771CD2D9D8E7500F64D3D /* Project28-SecretSwift */ = {
 			isa = PBXGroup;
 			children = (
+				40AA49762DA20FA700A56C9F /* Extensions */,
 				40B771DE2D9EF18A00F64D3D /* Utilities */,
 				40B771D82D9D8EC000F64D3D /* Screens */,
 				40B771D72D9D8E8900F64D3D /* Support */,
@@ -149,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				40B771DF2D9EF1C700F64D3D /* Constants+Utils.swift */,
+				40AA49742DA20ECB00A56C9F /* SSError+Utils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -299,11 +313,13 @@
 			files = (
 				40B771D32D9D8E7500F64D3D /* AppDelegate.swift in Sources */,
 				40B771E02D9EF1C700F64D3D /* Constants+Utils.swift in Sources */,
+				40AA49752DA20ECC00A56C9F /* SSError+Utils.swift in Sources */,
 				40B771D42D9D8E7500F64D3D /* Project28_SecretSwift.xcdatamodeld in Sources */,
 				40B771DC2D9EE9A300F64D3D /* KeychainItemAccessibility.swift in Sources */,
 				40B771DD2D9EE9A300F64D3D /* KeychainWrapper.swift in Sources */,
 				40B771D52D9D8E7500F64D3D /* SceneDelegate.swift in Sources */,
 				40B771D62D9D8E7500F64D3D /* HomeVC.swift in Sources */,
+				40AA49782DA20FBE00A56C9F /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

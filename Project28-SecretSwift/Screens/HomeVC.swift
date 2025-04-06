@@ -5,10 +5,13 @@
 import UIKit
 import LocalAuthentication
 
+
+
 class HomeVC: UIViewController
 {
     @IBOutlet var secret: UITextView!
-    var isFirstLoad = true
+    #warning("change back to false : true")
+    var isFirstLoad = KeychainWrapper.standard.string(forKey: SecretKeys.password) != nil ? true : true
     
     override func viewDidLoad()
     {
@@ -16,6 +19,58 @@ class HomeVC: UIViewController
         applyNavigationMask()
         setUpApplicationNotifications()
         setUpKeyboardNotifications()
+        isFirstLoad ? setPassword() : enterPassword()
+    }
+    
+    
+    func setPassword()
+    {
+        let ac                          = UIAlertController(title: "Set Password",
+                                                            message: "Set password",
+                                                            preferredStyle: .alert)
+        for _ in 0 ... 1 { ac.addTextField() }
+        for i in 0 ... 1 { ac.textFields?[i].isSecureTextEntry = true
+        }
+        ac.textFields?[0].placeholder   = "Set your password"
+        ac.textFields?[1].placeholder   = "Confirm your password"
+        
+        let action1 = UIAlertAction(title: "Confirm", style: .default) { [weak self] _ in
+            // present reasons b4 each guard's return
+            guard let pwd   = ac.textFields?[0].text else { self?.presentErrorMessage(errorType: .emptyPwdField); return }
+            guard let cPwd  = ac.textFields?[1].text else { self?.presentErrorMessage(errorType: .emptyCPwdField); return }
+            if pwd == cPwd {
+                KeychainWrapper.standard.set(pwd, forKey: SecretKeys.password)
+                self?.isFirstLoad       = false
+                self?.unlockSecretMessage()
+            }
+        }
+        
+        ac.addAction(action1)
+        present(ac, animated: true)
+    }
+    
+    
+    func enterPassword()
+    {
+        let ac                              = UIAlertController(title: "Enter password",
+                                                            message: "Enter your secure password",
+                                                            preferredStyle: .alert)
+        ac.addTextField()
+        ac.textFields?[0].isSecureTextEntry = true
+        ac.textFields?[0].placeholder       = "Enter your password"
+        let action1                         = UIAlertAction(title: "Done", style: .default) { [weak self] _ in
+            guard let pwd = ac.textFields?[0].text
+            else { self?.presentErrorMessage(errorType: .blankPostSet); return }
+            
+            guard pwd == KeychainWrapper.standard.string(forKey: SecretKeys.password)
+            else { self?.presentErrorMessage(errorType: .incorrectPassword) ; return }
+            
+            self?.unlockSecretMessage()
+            
+        }
+        
+        ac.addAction(action1)
+        present(ac, animated: true)
     }
     
     
@@ -24,9 +79,11 @@ class HomeVC: UIViewController
         let ctx = LAContext()
         var error: NSError?
         
-        /** if you can evaluate the policy as true (here's a pointer to my error var btw, you viejo Obj-C remnant) ...
+        /**
+         if you can evaluate the policy as true (here's a pointer to my error var btw, you viejo Obj-C remnant) ...
          then evalueate the policy with the OG NSError you set up who's value should now be filled via mem address
-         after '.canEvalPolicy' returned its Bool*/
+         after '.canEvalPolicy' returned its Bool
+         */
         
         if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) { evaluatePolicy(ctx: ctx) }
         else { handleNoBiometryError() }
@@ -101,6 +158,23 @@ class HomeVC: UIViewController
         let ac      = UIAlertController(title: "Authentication failed", message: msg, preferredStyle: .alert)
         ac.addAction(action1)
         self.present(ac, animated: true)
+    }
+    
+    
+    func presentErrorMessage(errorType: ErrorTypes)
+    {
+        switch errorType {
+        case .mismatchedPassword:
+            presentSSAlertOnMainThread(title: "Mismatch Detected", msg: SSError.mismatchOnCreation.rawValue)
+        case .emptyPwdField:
+            presentSSAlertOnMainThread(title: "Balnk field detected", msg: SSError.emptyPwdOnCreation.rawValue)
+        case .emptyCPwdField:
+            presentSSAlertOnMainThread(title: "Blank field detected", msg: SSError.emptyCPwdOnCreation.rawValue)
+        case .blankPostSet:
+            presentSSAlertOnMainThread(title: "No password entered", msg: SSError.blankPostCreation.rawValue)
+        case .incorrectPassword:
+            presentSSAlertOnMainThread(title: "Incorrect password", msg: SSError.incorrectPostCreation.rawValue)
+        }
     }
     
     //-------------------------------------//
