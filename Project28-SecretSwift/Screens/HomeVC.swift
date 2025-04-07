@@ -5,23 +5,31 @@
 import UIKit
 import LocalAuthentication
 
-
-
 class HomeVC: UIViewController
 {
-    
+    @IBOutlet var authButton: UIButton!
     @IBOutlet var secret: UITextView!
     #warning("change back to false : true")
     var isFirstLoad = KeychainWrapper.standard.string(forKey: SecretKeys.password) != nil ? true : true
-    var currentError: ErrorTypes?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        applyNavigationMask()
+        applyMaskAndSave()
         setUpApplicationNotifications()
         setUpKeyboardNotifications()
-        isFirstLoad ? setPassword() : enterPassword()
+        hideAuthButton()
+    }
+    
+    /**
+     revealing password alert in viewDidLoad caused soft error regarding detached VC
+     presenting the alert after the view appears solved the issue
+     */
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        isFirstLoad ? setPassword() : revealAuthButton()
     }
     
     
@@ -37,19 +45,18 @@ class HomeVC: UIViewController
         
         let action1 = UIAlertAction(title: "Confirm", style: .default) { [weak self] _ in
             // present reasons b4 each guard's return
-            guard let pwd   = ac.textFields?[0].text
+            guard let pwd       = ac.textFields?[0].text
             else { self?.presentSSAlertOnMainThread(errorType: .emptyPwdField); return }
             
-            guard let cPwd  = ac.textFields?[1].text
+            guard let cPwd      = ac.textFields?[1].text
             else { self?.presentSSAlertOnMainThread(errorType: .emptyCPwdField); return }
             
             guard pwd == cPwd
             else { self?.presentSSAlertOnMainThread(errorType: .mismatchedPassword); return }
             
             KeychainWrapper.standard.set(pwd, forKey: SecretKeys.password)
-            #warning("change back to false")
-            self?.isFirstLoad       = true
-//            self?.unlockSecretMessage()
+            self?.isFirstLoad   = false
+            self?.revealAuthButton()
         }
         
         ac.addAction(action1)
@@ -65,6 +72,7 @@ class HomeVC: UIViewController
         ac.addTextField()
         ac.textFields?[0].isSecureTextEntry = true
         ac.textFields?[0].placeholder       = "Enter your password"
+        
         let action1                         = UIAlertAction(title: "Done", style: .default) { [weak self] _ in
             guard let pwd = ac.textFields?[0].text
             else { self?.presentSSAlertOnMainThread(errorType: .blankPwdPostSet); return }
@@ -72,7 +80,7 @@ class HomeVC: UIViewController
             guard pwd == KeychainWrapper.standard.string(forKey: SecretKeys.password)
             else { self?.presentSSAlertOnMainThread(errorType: .incorrectPassword); return }
             
-            self?.unlockSecretMessage()
+            self?.removeMaskAndUnlock()
         }
         
         ac.addAction(action1)
@@ -92,7 +100,7 @@ class HomeVC: UIViewController
          */
         
         if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) { evaluatePolicy(ctx: ctx) }
-        else { handleNoBiometryError() }
+        else { presentSSAlertOnMainThread(errorType: .noBiometry) }
     }
     
     
@@ -102,111 +110,56 @@ class HomeVC: UIViewController
         
         ctx.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, authenticationError in
             DispatchQueue.main.async {
-                if success { self?.unlockSecretMessage() }
-                else { self?.handleAuthenticationError() }
+                if success { self?.removeMaskAndUnlock() }
+                else { self?.presentSSAlertOnMainThread(errorType: .authFail) }
             }
         }
     }
-
-    
-    func unlockSecretMessage()
-    {
-        secret.isHidden = false
-        removeNavigationMask()
-        secret.text     = KeychainWrapper.standard.string(forKey: SecretKeys.secretMessage) ?? ""
-    }
     
     
-    @objc func doneTapped()
-    {
-        saveSecretMessage()
-        applyNavigationMask()
-    }
+    @objc func doneTapped() { applyMaskAndSave() }
     
     //-------------------------------------//
-    // MARK: NAVIGATION MASKING & UNMASKING
-    
-    func hideAuthenticate()
-    {
-        
-    }
-    
-    
-    func revealAuthenticate()
-    {
-        
-    }
-    
-    
-    func applyNavigationMask()
-    {
-        title = SecretKeys.maskedTitle
-        self.navigationItem.rightBarButtonItem = nil
-    }
-    
-    
-    func removeNavigationMask()
-    {
-        title = SecretKeys.unmaskedTitle
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done",
-                                                                 style: .done,
-                                                                 target: self,
-                                                                 action: #selector(doneTapped))
-    }
-    
-    //-------------------------------------//
-    // MARK: ERROR HANDLING
-    
-    func handleNoBiometryError()
-    {
-        let msg     = "Your device is not configured for biometric authentication"
-        let action1 = UIAlertAction(title: "OK", style: .default)
-        
-        let ac      = UIAlertController(title: "Biometry unavailable", message: msg, preferredStyle: .alert)
-        ac.addAction(action1)
-        self.present(ac, animated: true)
-    }
-    
-    
-    func handleAuthenticationError()
-    {
-        let msg     = "You could not be verified; please try again."
-        let action1 = UIAlertAction(title: "OK", style: .default)
-        
-        let ac      = UIAlertController(title: "Authentication failed", message: msg, preferredStyle: .alert)
-        ac.addAction(action1)
-        self.present(ac, animated: true)
-    }
-    
-    
-//    func presentErrorMessage(errorType: ErrorTypes)
-//    {
-//        switch errorType {
-//        case .mismatchedPassword:
-//            currentError = .mismatchedPassword
-//            presentSSAlertOnMainThread(title: "Mismatch Detected", msg: SSErrorMessages.mismatchOnCreation.rawValue)
-//        case .emptyPwdField:
-//            presentSSAlertOnMainThread(title: "Balnk field detected", msg: SSErrorMessages.emptyPwdOnCreation.rawValue)
-//        case .emptyCPwdField:
-//            presentSSAlertOnMainThread(title: "Blank field detected", msg: SSErrorMessages.emptyCPwdOnCreation.rawValue)
-//        case .blankPwdPostSet:
-//            presentSSAlertOnMainThread(title: "No password entered", msg: SSErrorMessages.blankPostCreation.rawValue)
-//        case .incorrectPassword:
-//            presentSSAlertOnMainThread(title: "Incorrect password", msg: SSErrorMessages.incorrectPostCreation.rawValue)
-//        }
-//    }
-    
-    //-------------------------------------//
-    // MARK: SAVE & LOAD
+    // MARK: SAVE & LOAD METHODS - KEYCHAIN
     
     @objc func saveSecretMessage()
     {
         guard secret.isHidden == false else { return }
-        
         KeychainWrapper.standard.set(secret.text, forKey: SecretKeys.secretMessage)
-        secret.resignFirstResponder()
-        secret.isHidden = true
-        title           = SecretKeys.maskedTitle
+    }
+    
+    //-------------------------------------//
+    // MARK: NAVIGATION MASKING & UNMASKING METHODS
+    
+    func hideAuthButton() { authButton.isHidden = true }
+    
+    
+    func revealAuthButton() { authButton.isHidden = false }
+    
+    
+    @objc func applyMaskAndSave()
+    {
+        self.navigationItem
+            .rightBarButtonItem = nil
+        
+        if secret.isHidden == false { secret.resignFirstResponder(); saveSecretMessage() }
+        
+        title                   = SecretKeys.maskedTitle
+        secret.isHidden         = true
+    }
+    
+    
+    func removeMaskAndUnlock()
+    {
+        secret.isHidden         = false
+        self.navigationItem
+            .rightBarButtonItem = UIBarButtonItem(title: "Done",
+                                                  style: .done,
+                                                  target: self,
+                                                  action: #selector(doneTapped))
+        
+        title                   = SecretKeys.unmaskedTitle
+        secret.text             = KeychainWrapper.standard.string(forKey: SecretKeys.secretMessage) ?? ""
     }
     
     //-------------------------------------//
@@ -216,7 +169,7 @@ class HomeVC: UIViewController
     {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
-                                       selector: #selector(saveSecretMessage),
+                                       selector: #selector(applyMaskAndSave),
                                        name: UIApplication.willResignActiveNotification,
                                        object: nil)
     }
@@ -257,7 +210,7 @@ class HomeVC: UIViewController
         secret.horizontalScrollIndicatorInsets  = secret.contentInset
         secret.verticalScrollIndicatorInsets    = secret.contentInset
         
-        let selectedRange               = secret.selectedRange
+        let selectedRange                       = secret.selectedRange
         secret.scrollRangeToVisible(selectedRange)
     }
 }

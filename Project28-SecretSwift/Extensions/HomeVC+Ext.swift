@@ -6,18 +6,8 @@ import UIKit
 
 extension HomeVC
 {
-//    func presentSSAlertOnMainThread(title: String, msg: String)
-//    {
-//        DispatchQueue.main.async {
-//            let ac = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-//                if self?.currentError == .mismatchedPassword { self?.setPassword() }
-//            })
-//            
-//            self.present(ac, animated: true)
-//        }
-//    }
-    
+    //-------------------------------------//
+    // MARK: ERROR HANDLING
     
     func presentSSAlertOnMainThread(errorType: ErrorTypes)
     {
@@ -34,8 +24,8 @@ extension HomeVC
             handle(.incorrectPassword, title: "Incorrect password", msg: SSError.incorrectPostCreation.rawValue)
         case .noBiometry:
             handle(.noBiometry, title: "Biometry unavailable", msg: SSError.noBiometry.rawValue)
-        case .authenticationFailure:
-            handle(.authenticationFailure, title: "Could not authenticate", msg: SSError.authenticationFailure.rawValue)
+        case .authFail:
+            handle(.authFail, title: "Could not authenticate", msg: SSError.authFail.rawValue)
         }
     }
     
@@ -47,32 +37,10 @@ extension HomeVC
             ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                 if err == .mismatchedPassword || err == .emptyPwdField || err == .emptyCPwdField { self?.setPassword() }
                 else if err == .blankPwdPostSet || err == .incorrectPassword { self?.enterPassword() }
+                else if err == .noBiometry || err == .authFail { self?.enterPassword() }
             })
             
             self.present(ac, animated: true)
         }
     }
-    
-    /**
-     func handleNoBiometryError()
-     {
-         let msg     = "Your device is not configured for biometric authentication"
-         let action1 = UIAlertAction(title: "OK", style: .default)
-         
-         let ac      = UIAlertController(title: "Biometry unavailable", message: msg, preferredStyle: .alert)
-         ac.addAction(action1)
-         self.present(ac, animated: true)
-     }
-     
-     
-     func handleAuthenticationError()
-     {
-         let msg     = "You could not be verified; please try again."
-         let action1 = UIAlertAction(title: "OK", style: .default)
-         
-         let ac      = UIAlertController(title: "Authentication failed", message: msg, preferredStyle: .alert)
-         ac.addAction(action1)
-         self.present(ac, animated: true)
-     }
-     */
 }
