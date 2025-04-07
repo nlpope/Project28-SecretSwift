@@ -32,7 +32,7 @@ class HomeVC: UIViewController
         isFirstLoad ? setPassword() : revealAuthButton()
     }
     
-    
+    #warning("problem child; along w all other alert controllers")
     func setPassword()
     {
         let ac                          = UIAlertController(title: "Set Password",
