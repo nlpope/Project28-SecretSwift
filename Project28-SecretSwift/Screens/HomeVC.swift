@@ -9,8 +9,7 @@ class HomeVC: UIViewController
 {
     @IBOutlet var authButton: UIButton!
     @IBOutlet var secret: UITextView!
-    #warning("change back to false : true")
-    var isFirstLoad = KeychainWrapper.standard.string(forKey: SecretKeys.password) != nil ? true : true
+    var isFirstLoad = KeychainWrapper.standard.string(forKey: SecretKeys.password) != nil ? false : true
     
     override func viewDidLoad()
     {
@@ -32,7 +31,6 @@ class HomeVC: UIViewController
         isFirstLoad ? setPassword() : revealAuthButton()
     }
     
-    #warning("problem child; along w all other alert controllers")
     func setPassword()
     {
         let ac                          = UIAlertController(title: "Set Password",
