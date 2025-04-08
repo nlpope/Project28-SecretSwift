@@ -42,7 +42,6 @@ class HomeVC: UIViewController
         ac.textFields?[1].placeholder   = "Confirm your password"
         
         let action1 = UIAlertAction(title: "Confirm", style: .default) { [weak self] _ in
-            // present reasons b4 each guard's return
             guard let pwd       = ac.textFields?[0].text
             else { self?.presentSSAlertOnMainThread(errorType: .emptyPwdField); return }
             

@@ -6,8 +6,7 @@ import Foundation
 
 enum ErrorTypes
 {
-    case mismatchedPassword, emptyPwdField, emptyCPwdField, blankPwdPostSet, incorrectPassword,
-         noBiometry, authFail
+    case mismatchedPassword, emptyPwdField, emptyCPwdField, blankPwdPostSet, incorrectPassword, noBiometry, authFail
 }
 
 enum SSError: String, Error
