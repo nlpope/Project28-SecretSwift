@@ -76,3 +76,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//-------------------------------------//
+// MARK: - NOTES SECTION
+
+/**
+ swift @ version: 6 (released 09.17.2024)
+ iOS @ version: 18.5 (released 05.14.2025)
+ xcode @ version: 16.3 (released 03.31.2025)
+ --------------------------
+ XXXXXXXXXXXXXXXXXXXXXXXX
+ --------------------------
+ PROBLEM TRACKING:
+ * = problem
+ >  = solution
+ --------------------------
+ *
+ >
+ --------------------------
+ *
+ >
+ --------------------------
+ XXXXXXXXXXXXXXXXXXXXXXXX
+ --------------------------
+ TECHNOLOGIES USED / LEARNED:
+ * Swift
+ * MIT's Swift Keychain Wrapper
+ --------------------------
+ XXXXXXXXXXXXXXXXXXXXXXXX
+ --------------------------
+ HORNS-TO-TOOT::
+ 🎺
+ --------------------------
+ XXXXXXXXXXXXXXXXXXXXXXXX
+ --------------------------
+ REFERENCES & CREDITS:
+ * KeychainOptions.swift & SwiftKeychainWrapper by MIT's James Blair on 4/24/16.
+ --------------------------
+ XXXXXXXXXXXXXXXXXXXXXXXX
+ --------------------------
+ */
+
